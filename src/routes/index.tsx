@@ -30,6 +30,48 @@ import healthPackagesPhoto from "../assets/service-health-packages.png";
 
 const primaryPhone = "+919061400041";
 
+// Set VITE_SITE_URL in your production environment, for example:
+const siteUrl = "https://hitechhealthcare.co.in";
+const canonicalUrl = siteUrl;
+const logoUrl = `${siteUrl}${logoAsset}`;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  name: "Hi-Tech Health Care",
+  description:
+    "Diagnostic clinic in Mannarkad offering lab tests, digital X-ray, home sample collection and health packages.",
+  url: canonicalUrl,
+  telephone: primaryPhone,
+  image: logoUrl,
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Galaxy Mall, Near Thaluk Hospital",
+    addressLocality: "Mannarkad",
+    addressRegion: "Kerala",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 10.9948056,
+    longitude: 76.4654722,
+  },
+  hasMap: "https://www.google.com/maps/search/?api=1&query=10.9948056,76.4654722",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "06:00",
+      closes: "22:00",
+    },
+  ],
+  areaServed: {
+    "@type": "City",
+    name: "Mannarkad",
+  },
+  medicalSpecialty: "Pathology",
+};
+
 const services = [
   {
     icon: FlaskConical,
@@ -73,20 +115,33 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Hi-Tech Health Care | Diagnostic Clinic Mannarkad",
+        title: "Hi-Tech Health Care | Diagnostic Clinic in Mannarkad",
       },
       {
         name: "description",
         content:
-          "Accurate lab tests, digital X-ray, home collection and health packages near Thaluk Hospital, Mannarkad. Open daily, 6 AM–10 PM.",
+          "Hi-Tech Health Care in Mannarkad offers lab tests, digital X-ray, home sample collection and preventive health packages near Thaluk Hospital. Open daily from 6 AM to 10 PM.",
+      },
+      {
+        name: "robots",
+        content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      },
+      {
+        name: "author",
+        content: "Hi-Tech Health Care",
+      },
+      {
+        name: "theme-color",
+        content: "#0f766e",
       },
       {
         property: "og:title",
-        content: "Hi-Tech Health Care — Your Health Partner",
+        content: "Hi-Tech Health Care | Diagnostic Clinic in Mannarkad",
       },
       {
         property: "og:description",
-        content: "Trusted diagnostics, digital X-ray and home sample collection in Mannarkad.",
+        content:
+          "Trusted diagnostic services, lab tests, digital X-ray, home collection and health packages in Mannarkad.",
       },
       {
         property: "og:type",
@@ -94,17 +149,55 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:url",
-        content: "/",
+        content: canonicalUrl,
+      },
+      {
+        property: "og:site_name",
+        content: "Hi-Tech Health Care",
+      },
+      {
+        property: "og:locale",
+        content: "en_IN",
+      },
+      {
+        property: "og:image",
+        content: logoUrl,
+      },
+      {
+        property: "og:image:alt",
+        content: "Hi-Tech Health Care diagnostic clinic in Mannarkad",
       },
       {
         name: "twitter:card",
         content: "summary_large_image",
       },
+      {
+        name: "twitter:title",
+        content: "Hi-Tech Health Care | Diagnostic Clinic in Mannarkad",
+      },
+      {
+        name: "twitter:description",
+        content: "Lab tests, digital X-ray, home collection and health packages in Mannarkad.",
+      },
+      {
+        name: "twitter:image",
+        content: logoUrl,
+      },
+      {
+        name: "twitter:image:alt",
+        content: "Hi-Tech Health Care diagnostic clinic in Mannarkad",
+      },
     ],
     links: [
       {
         rel: "canonical",
-        href: "/",
+        href: canonicalUrl,
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(structuredData),
       },
     ],
   }),
@@ -121,6 +214,9 @@ function Brand({ footer = false }: { footer?: boolean }) {
       <img
         src={logoAsset}
         alt="Hi-Tech Health Care logo"
+        width="44"
+        height="44"
+        decoding="async"
         className="h-11 w-11 shrink-0 object-contain"
       />
 
@@ -300,7 +396,10 @@ function HomePage() {
           </div>
 
           {/* HERO IMAGE GRID */}
-          <div className="relative mx-auto w-full max-w-lg" aria-hidden="true">
+          <div
+            className="relative mx-auto w-full max-w-lg"
+            aria-label="Hi-Tech Health Care diagnostic services"
+          >
             <div className="absolute -inset-6 rounded-[3rem] border border-primary/10" />
 
             <div className="relative aspect-square rounded-[2.5rem] bg-primary p-6 shadow-soft sm:p-9">
@@ -382,7 +481,12 @@ function HomePage() {
                 className="group overflow-hidden rounded-xl border border-border bg-card shadow-card transition-transform hover:-translate-y-1"
               >
                 {image ? (
-                  <img src={image} alt="" className="h-36 w-full object-cover" />
+                  <img
+                    src={image}
+                    alt={`${title} at Hi-Tech Health Care, Mannarkad`}
+                    loading="lazy"
+                    className="h-36 w-full object-cover"
+                  />
                 ) : (
                   <div className="p-6 pb-0">
                     <div className="grid h-11 w-11 place-items-center rounded-lg bg-surface-teal text-primary transition-colors group-hover:bg-brand-green-soft">
