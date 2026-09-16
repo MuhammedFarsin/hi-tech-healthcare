@@ -190,7 +190,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: canonicalUrl },
-      { rel: "icon", type: "image/png", href: logoAsset },
+      { rel: "icon", href: "/public/favicon.ico", sizes: "any" },
       { rel: "apple-touch-icon", href: logoAsset },
     ],
     scripts: [
